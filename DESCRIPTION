@@ -1,0 +1,10 @@
+Package: cre
+Title: R-Package to build Compressed Rule Ensembles
+Version: 1.0
+Authors@R: person("Malte", "Nalenz", , "malte.nlz@gmail.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+License: use_gpl3_license()
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: dplyr, xgboost,stringr , glmnet, Ckmeans.1d.dp, ggplot2, tidyr, stats, magrittr
