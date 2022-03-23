@@ -9,10 +9,10 @@ devtools::install_git("https://github.com/maltenlz/Compressed-Rule-Ensembles")
 # Example on simulated data
 
 Draw data from mixture of normals:<br /><br />
-x1 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))
-x2 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))
-x = cbind(x1, x2)
-y = c(rep(1, times = 100), rep(0, times = 100))
+x1 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))<br />
+x2 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))<br />
+x = cbind(x1, x2)<br />
+y = c(rep(1, times = 100), rep(0, times = 100))<br />
 
 Run the CRE model with default settings:<br />
 <br />
