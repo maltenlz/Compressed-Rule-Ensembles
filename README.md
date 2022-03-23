@@ -5,3 +5,23 @@ R Implementation of Compressed Rule Ensemble Models introduced in "Compressed Ru
 
 library(devtools) <br />
 devtools::install_git("https://github.com/maltenlz/Compressed-Rule-Ensembles")
+
+# Example on simulated data
+
+Draw data from mixture of normals:
+x1 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))
+x2 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))
+x = cbind(x1, x2)
+y = c(rep(1, times = 100), rep(0, times = 100))
+
+Run the CRE model with default settings:
+cre_mod = cre(x, y, task = "class")
+
+Predict in-sample:
+predict(cre_mod, x)
+
+Look at the most important rules:
+important_rules(cre_mod)
+
+Also look the distribution of split points:
+visualise_clusters(cre_mod)
