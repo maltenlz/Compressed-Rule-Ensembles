@@ -8,7 +8,7 @@ devtools::install_git("https://github.com/maltenlz/Compressed-Rule-Ensembles")
 
 # Example on simulated data
 
-Draw data from mixture of normals:
+Draw data from mixture of normals:<br /><br />
 x1 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))
 x2 = c(rnorm(100,-1, 1), rnorm(100, 1, 1))
 x = cbind(x1, x2)
