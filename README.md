@@ -15,13 +15,15 @@ x = cbind(x1, x2)
 y = c(rep(1, times = 100), rep(0, times = 100))
 
 Run the CRE model with default settings:<br />
+<br />
 cre_mod = cre(x, y, task = "class")
 
 Predict in-sample:<br />
+<br />
 predict(cre_mod, x)
 
-Look at the most important rules:<br />
+Look at the most important rules:<br /><br />
 important_rules(cre_mod)
 
-Also look the distribution of split points:<br />
+Also look the distribution of split points:<br /><br />
 visualise_clusters(cre_mod)
