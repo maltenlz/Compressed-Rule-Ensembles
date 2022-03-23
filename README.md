@@ -27,3 +27,5 @@ important_rules(cre_mod)
 
 Also look the distribution of split points:<br /><br />
 visualise_clusters(cre_mod)
+
+# This package is actively developed with more extensions coming soon...
