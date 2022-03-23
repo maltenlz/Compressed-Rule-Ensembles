@@ -49,9 +49,10 @@ cre = function(x,
   sd_x             = apply(Xr, 2, stats::sd)
 
   rule_depth       = rules_frame$ensemble_rules %>% dplyr::group_by(ensemble_rule) %>% dplyr::summarise(depth = dplyr::n())
+  rule_depth       = rule_depth[match(unique(rules_frame$ensemble_rules$ensemble_rule), rule_depth$ensemble_rule),]## preserve the original order
   delete           = unique(append(delete, which(mu_x < min_sup | 1-mu_x < min_sup)))
 
-  Xr               = t(apply(Xr[,-delete],1,function(x)x/rule_depth$depth[-delete]^eta))
+  Xr               = t(apply(Xr[,-delete],1,function(x)x/(rule_depth$depth[-delete]^eta)))
 
 
   for(p in 1:ncol(x)){
