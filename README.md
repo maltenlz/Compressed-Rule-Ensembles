@@ -4,7 +4,7 @@ R Implementation of Compressed Rule Ensemble Models introduced in "Compressed Ru
 # Install
 
 library(devtools) <br />
-devtools::install_git("https://github.com/maltenlz/Compressed-Rule-Ensembles")
+devtools::install_git("https://github.com/maltenlz/Compressed-Rule-Ensembles")<br />
 library(cre)
 
 # Example on simulated data
