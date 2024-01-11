@@ -6,5 +6,5 @@ Description: Compressed Rule Ensemble Learning for prediction and analysing data
 License: use_gpl3_license()
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.0
 Imports: dplyr, xgboost, stringr , glmnet, Ckmeans.1d.dp, ggplot2, tidyr, stats, magrittr

@@ -41,7 +41,7 @@ cre = function(x,
   mu_y             = mean(y)
   Xr               = transformX(x = x, rules_frame)
 
-  if (nrow(rules_frame) > 0){
+  if (length(rules) > 0){
   delete           = delete_duplicates(x = Xr, rules_frame)
   } else {
   delete           = c()
