@@ -28,17 +28,29 @@ cre = function(x,
                model_type = "glmnet",
                eta = 0.5){
 
+  mu_lin           = apply(x, 2, mean)
+  sd_lin           = apply(x, 2, stats::sd)
+
+
+  delete           = c()
+  rules_frame      = data.frame()
+  mu_x             = c()
+  sd_x             = c()
+  rule_depth       = list(depth = NULL)
+
   if(task == "class"){
     y = as.numeric(as.factor(y))-1
+    sd_y             = stats::sd(y)
+    mu_y             = mean(y)
   }
   rules            = genrulesXGB(x = x,
                                  y = y,
                                  forest_control = forest_control,
                                  task = task
   )
+  if(length(rules)>0){
   rules_frame      = cluster_rules(rules, k = k)
-  sd_y             = stats::sd(y)
-  mu_y             = mean(y)
+
   Xr               = transformX(x = x, rules_frame)
 
   if (length(rules) > 0){
@@ -47,8 +59,6 @@ cre = function(x,
   delete           = c()
   }
 
-  mu_lin           = apply(x, 2, mean)
-  sd_lin           = apply(x, 2, stats::sd)
   mu_x             = apply(Xr, 2, mean)
   sd_x             = apply(Xr, 2, stats::sd)
 
@@ -62,13 +72,21 @@ cre = function(x,
     Xr               = t(apply(Xr,1,function(x)x/rule_depth$depth^eta))
   }
 
+  } else {
+    Xr               = data.frame()
+  }
+
   for(p in 1:ncol(x)){
     x[,p] = (x[,p]-mu_lin[p])/sd_lin[p]
   }
 
   if(model_type == "glmnet"){
     if(linear ==  T){
+      if(ncol(Xr) > 0){
       Xr = cbind(x*0.4, Xr)
+      } else {
+      Xr = x*0.4
+      }
     }
     outer_model          = glmnet::cv.glmnet(as.matrix(Xr),
                                      y,
