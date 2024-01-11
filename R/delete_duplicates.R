@@ -13,7 +13,7 @@ delete_duplicates = function(x,
   un_rules       = unique(ensemble_rules$ensemble_rule)
   overall        = ensemble_rules %>% dplyr::group_by(ensemble_rule) %>% dplyr::summarise(support = n())
   Cmat           = stats::cor(x)
-  p              = ncol(x)
+  p              = ncol(Cmat)
   remove         = c()
   for(j in 1:(p-1)){
     inds   = which(abs(Cmat[j,(j+1):p]) == 1)
