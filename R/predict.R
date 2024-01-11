@@ -5,11 +5,16 @@
 #' @param s if glmnet is used either "lambda.min" or "lambda.1se". Defaul is "lambda.1se"
 #' @return list with conditions and rules
 #' @export
-#' 
+#'
 predict.cre_mod = function(model, newdata, s = "lambda.min"){
   Xtest = transformX(newdata, model$rules)
-  Xtest = t(apply(Xtest[,-model$delete],1,function(x)x/model$rule_depth[-model$delete]^model$eta))
-  
+  if(length(model$delete) > 0){
+    Xtest = t(apply(Xtest[,-model$delete],1,function(x)x/model$rule_depth[-model$delete]^model$eta))
+  } else {
+    Xtest = t(apply(Xtest,1,function(x)x/model$rule_depth^model$eta))
+  }
+
+
   for(p in 1:ncol(newdata)){
     newdata[,p] = (newdata[,p]-model$mu_lin[p])/model$sd_lin[p]
   }

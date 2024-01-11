@@ -50,8 +50,11 @@ cre = function(x,
 
   rule_depth       = rules_frame$ensemble_rules %>% dplyr::group_by(ensemble_rule) %>% dplyr::summarise(depth = dplyr::n())
   delete           = unique(append(delete, which(mu_x < min_sup | 1-mu_x < min_sup)))
-
-  Xr               = t(apply(Xr[,-delete],1,function(x)x/rule_depth$depth[-delete]^eta))
+  if( length(delete) > 0){
+    Xr               = t(apply(Xr[,-delete],1,function(x)x/rule_depth$depth[-delete]^eta))
+  } else {
+    Xr               = t(apply(Xr,1,function(x)x/rule_depth$depth^eta))
+  }
 
 
   for(p in 1:ncol(x)){
