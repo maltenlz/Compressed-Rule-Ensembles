@@ -33,7 +33,9 @@ cluster_rules = function(rules, k){
     dplyr::group_by(rule, split_var, rule_group) %>% dplyr::slice(dplyr::n()) %>% dplyr::ungroup() %>%
     dplyr::group_by(rule) %>% dplyr::arrange(split_var, rule_group) %>% dplyr::mutate(ensemble_rule = paste(ensemble_condition, direction, collapse = "_"), rule_length= dplyr::n()) %>%
     dplyr::ungroup()
-  list(ensemble_conds = rules_frame[,c("ensemble_condition", "split_var", "split_val")] %>% dplyr::group_by(ensemble_condition, split_val, split_var) %>% dplyr::summarise(n = n(), .groups = 'drop') %>% dplyr::ungroup(),
+  list(ensemble_conds = rules_frame[,c("ensemble_condition", "split_var", "split_val", "rule_group")] %>%
+                        dplyr::group_by(ensemble_condition, split_val, split_var, rule_group) %>% dplyr::summarise(n = n(), .groups = 'drop') %>%
+                        dplyr::ungroup(),
        ensemble_rules = rules_frame %>% dplyr::group_by(ensemble_rule) %>% dplyr::mutate(forest_support = n(), dup = duplicated(ensemble_condition)) %>% dplyr::filter(!dup) %>% arrange(desc(rule))
   )
 }
