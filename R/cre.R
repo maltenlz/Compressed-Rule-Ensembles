@@ -40,8 +40,10 @@ cre = function(x,
   sd_y             = stats::sd(y)
   mu_y             = mean(y)
   Xr               = transformX(x = x, rules_frame)
-  delete           = delete_duplicates(x = Xr, rules_frame)
 
+  if nrow(rules_frame > 0){
+  delete           = delete_duplicates(x = Xr, rules_frame)
+  }
 
   mu_lin           = apply(x, 2, mean)
   sd_lin           = apply(x, 2, stats::sd)
