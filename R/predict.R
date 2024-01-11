@@ -8,11 +8,15 @@
 #'
 
 predict.cre_mod = function(model, newdata, s = "lambda.min"){
+  if(length(model$rules) > 0){
   Xtest = transformX(newdata, model$rules)
   if(length(model$delete) > 0){
     Xtest = t(apply(Xtest[,-model$delete],1,function(x)x/model$rule_depth[-model$delete]^model$eta))
   } else {
     Xtest = t(apply(Xtest,1,function(x)x/model$rule_depth^model$eta))
+  }
+  } else {
+    Xtest = data.frame()
   }
 
 
@@ -20,7 +24,11 @@ predict.cre_mod = function(model, newdata, s = "lambda.min"){
     newdata[,p] = (newdata[,p]-model$mu_lin[p])/model$sd_lin[p]
   }
   if(model$linear == T){
+    if(length(model$rules) > 0){
     Xtest = cbind(newdata*0.4, Xtest)
+    } else {
+    Xtest = newdata*0.4
+    }
   }
   colnames(Xtest) = model$mat_names
   outer_model     = model$outer_model
