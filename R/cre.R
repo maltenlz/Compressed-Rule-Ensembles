@@ -30,6 +30,7 @@ cre = function(x,
 
   mu_lin           = apply(x, 2, mean)
   sd_lin           = apply(x, 2, stats::sd)
+  sd_lin[sd_lin == 0]   = 1
 
 
   delete           = c()
