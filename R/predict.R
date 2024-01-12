@@ -9,7 +9,8 @@
 
 predict.cre_mod = function(model, newdata, s = "lambda.min"){
   if(length(model$rules) > 0){
-  Xtest = as.matrix(transformX(newdata, model$rules), ncol = length(model$rules))
+  Xtest = transformX(newdata, model$rules)
+
   if(length(model$delete) > 0){
     Xtest = t(apply(Xtest[,-model$delete],1,function(x)x/model$rule_depth[-model$delete]^model$eta))
   } else {
@@ -19,7 +20,9 @@ predict.cre_mod = function(model, newdata, s = "lambda.min"){
     Xtest = data.frame()
   }
 
-
+  if (length(rules) == 1){
+    Xtest = t(Xtest)
+  }
   for(p in 1:ncol(newdata)){
     newdata[,p] = (newdata[,p]-model$mu_lin[p])/model$sd_lin[p]
   }

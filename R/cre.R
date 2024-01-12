@@ -51,9 +51,9 @@ cre = function(x,
   if(length(rules)>0){
   rules_frame      = cluster_rules(rules, k = k)
 
-  Xr               = as.matrix(transformX(x = x, rules_frame), ncol = length(rules))
+  Xr               = transformX(x = x, rules_frame)
 
-  if (length(rules) > 1){
+  if (length(rules) > 2){
   delete           = delete_duplicates(x = Xr, rules_frame)
   } else {
   delete           = c()
@@ -75,7 +75,9 @@ cre = function(x,
   } else {
     Xr               = data.frame()
   }
-
+  if (length(rules) == 1){
+    Xr = t(Xr)
+  }
   for(p in 1:ncol(x)){
     x[,p] = (x[,p]-mu_lin[p])/sd_lin[p]
   }
