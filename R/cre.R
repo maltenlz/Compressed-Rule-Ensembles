@@ -51,7 +51,7 @@ cre = function(x,
   if(length(rules)>0){
   rules_frame      = cluster_rules(rules, k = k)
 
-  Xr               = transformX(x = x, rules_frame)
+  Xr               = as.matrix(transformX(x = x, rules_frame), ncol = length(rules))
 
   if (length(rules) > 1){
   delete           = delete_duplicates(x = Xr, rules_frame)
