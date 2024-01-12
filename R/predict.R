@@ -8,7 +8,7 @@
 #'
 
 predict.cre_mod = function(model, newdata, s = "lambda.min"){
-  if(model$n_rules){
+  if(model$n_rules > 0){
   Xtest = transformX(newdata, model$rules)
 
   if(length(model$delete) > 0){
