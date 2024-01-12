@@ -53,7 +53,7 @@ cre = function(x,
 
   Xr               = transformX(x = x, rules_frame)
 
-  if (length(rules) > 0){
+  if (length(rules) > 1){
   delete           = delete_duplicates(x = Xr, rules_frame)
   } else {
   delete           = c()
