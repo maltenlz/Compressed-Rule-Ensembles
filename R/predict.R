@@ -20,7 +20,7 @@ predict.cre_mod = function(model, newdata, s = "lambda.min"){
     Xtest = data.frame()
   }
 
-  if (length(model$rules_symb)){
+  if (length(model$rules_symb) == 1){
     Xtest = t(Xtest)
   }
   for(p in 1:ncol(newdata)){
