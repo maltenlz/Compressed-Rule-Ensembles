@@ -8,7 +8,7 @@
 #'
 
 predict.cre_mod = function(model, newdata, s = "lambda.min"){
-  if(length(model$rules_symb) > 0){
+  if(model$n_rules){
   Xtest = transformX(newdata, model$rules)
 
   if(length(model$delete) > 0){
@@ -20,7 +20,7 @@ predict.cre_mod = function(model, newdata, s = "lambda.min"){
     Xtest = data.frame()
   }
 
-  if (length(model$rules_symb) == 1){
+  if (model$n_rules == 1){
     Xtest = t(Xtest)
   }
   for(p in 1:ncol(newdata)){

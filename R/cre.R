@@ -38,6 +38,7 @@ cre = function(x,
   mu_x             = c()
   sd_x             = c()
   rule_depth       = list(depth = NULL)
+  nrules           = 0
 
   if(task == "class"){
     y = as.numeric(as.factor(y))-1
@@ -53,7 +54,7 @@ cre = function(x,
   rules_frame      = cluster_rules(rules, k = k)
 
   Xr               = transformX(x = x, rules_frame)
-
+  nrules           = ncol(Xr)
   if (length(rules) > 2){
   delete           = delete_duplicates(x = Xr, rules_frame)
   } else {
@@ -101,7 +102,7 @@ cre = function(x,
                                      intercept = T)
   }
   out = list(rules         = rules_frame,
-             rules_symb    = rules,
+             n_rules       = nrules,
              p_lin         = ncol(x),
              outer_model   = outer_model,
              deleted       = delete,
