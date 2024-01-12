@@ -9,7 +9,7 @@
 
 predict.cre_mod = function(model, newdata, s = "lambda.min"){
   if(length(model$rules) > 0){
-  Xtest = as.matrix(transformX(newdata, model$rules), ncol = length(rules))
+  Xtest = as.matrix(transformX(newdata, model$rules), ncol = length(model$rules))
   if(length(model$delete) > 0){
     Xtest = t(apply(Xtest[,-model$delete],1,function(x)x/model$rule_depth[-model$delete]^model$eta))
   } else {
