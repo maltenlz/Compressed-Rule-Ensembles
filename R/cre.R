@@ -100,6 +100,7 @@ cre = function(x,
                                      intercept = T)
   }
   out = list(rules         = rules_frame,
+             rules_symb    = rules,
              p_lin         = ncol(x),
              outer_model   = outer_model,
              deleted       = delete,
