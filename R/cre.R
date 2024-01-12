@@ -54,7 +54,6 @@ cre = function(x,
   rules_frame      = cluster_rules(rules, k = k)
 
   Xr               = transformX(x = x, rules_frame)
-  nrules           = ncol(Xr)
   if (length(rules) > 2){
   delete           = delete_duplicates(x = Xr, rules_frame)
   } else {
@@ -67,6 +66,7 @@ cre = function(x,
   rule_depth       = rules_frame$ensemble_rules %>% dplyr::group_by(ensemble_rule) %>% dplyr::summarise(depth = dplyr::n())
   rule_depth       = rule_depth[match(unique(rules_frame$ensemble_rules$ensemble_rule), rule_depth$ensemble_rule),]## preserve the original order
   delete           = unique(append(delete, which(mu_x < min_sup | 1-mu_x < min_sup)))
+  nrules           = ncol(Xr) - length(delete)
 
   if( length(delete) > 0){
     Xr               = t(apply(Xr[,-delete],1,function(x)x/rule_depth$depth[-delete]^eta))
@@ -77,7 +77,7 @@ cre = function(x,
   } else {
     Xr               = data.frame()
   }
-  if (length(rules) == 1){
+  if (nrules == 1){
     Xr = t(Xr)
   }
   for(p in 1:ncol(x)){
